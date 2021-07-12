@@ -16,7 +16,7 @@ extension RoutesBuilder {
     ///     access token that is called when auth completes.
     public func oAuth<OAuthProvider>(
         from provider: OAuthProvider.Type,
-        authenticate authUrl: String,
+        authenticate authUrl: [PathComponent],
         authenticateCallback: ((Request) throws -> (EventLoopFuture<Void>))? = nil,
         callback: String,
         scope: [String] = [],
@@ -45,7 +45,7 @@ extension RoutesBuilder {
     ///   - redirect: The path/URL to redirect to when auth completes.
     public func oAuth<OAuthProvider>(
         from provider: OAuthProvider.Type,
-        authenticate authUrl: String,
+        authenticate authUrl: PathComponent...,
         authenticateCallback: ((Request) throws -> (EventLoopFuture<Void>))? = nil,
         callback: String,
         scope: [String] = [],

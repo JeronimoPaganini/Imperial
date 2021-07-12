@@ -10,7 +10,7 @@ public final class Shopify: FederatedService {
 
     public init(
         routes: RoutesBuilder,
-        authenticate: String,
+        authenticate: [PathComponent],
         authenticateCallback: ((Request) throws -> (EventLoopFuture<Void>))?,
         callback: String,
         scope: [String],
@@ -20,7 +20,7 @@ public final class Shopify: FederatedService {
         self.shopifyRouter.scope = scope
 
         try self.router.configureRoutes(
-            withAuthURL: authenticate,
+            withAuthURL: authenticate.string,
             authenticateCallback: authenticateCallback,
             on: routes
         )

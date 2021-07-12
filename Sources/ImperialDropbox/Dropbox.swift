@@ -8,7 +8,7 @@ public class Dropbox: FederatedService {
     @discardableResult
     public required init(
         routes: RoutesBuilder,
-        authenticate: String,
+        authenticate: [PathComponent],
         authenticateCallback: ((Request) throws -> (EventLoopFuture<Void>))?,
         callback: String,
         scope: [String] = [],
@@ -18,7 +18,7 @@ public class Dropbox: FederatedService {
         self.tokens = self.router.tokens
         
         self.router.scope = scope
-        try self.router.configureRoutes(withAuthURL: authenticate, authenticateCallback: authenticateCallback, on: routes)
+        try self.router.configureRoutes(withAuthURL: authenticate.string, authenticateCallback: authenticateCallback, on: routes)
         
         OAuthService.register(.dropbox)
     }
